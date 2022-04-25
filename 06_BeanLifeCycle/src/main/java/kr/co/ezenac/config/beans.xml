@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-init-method="default_init" default-destroy-method="default_destroy"					
+						>
+
+	<!-- init-method, destroy-method 설정 -->
+	<bean id="t1" class="kr.co.ezenac.beans.TestBean1"
+					lazy-init="true"
+					init-method="bean1_init"
+					destroy-method="bean1_destroy"
+	></bean>
+	
+	<!-- default method -->
+	<bean id="t2" class="kr.co.ezenac.beans.TestBean2" lazy-init="true"></bean>
+	
+	<!-- bean 에 적힌 init-method beans에 적힌 defalut-init-method 보다 우선이다 -->
+	<bean id="t3" class="kr.co.ezenac.beans.TestBean3"
+		lazy-init="true" init-method="bean3_init" destroy-method="bean3_destroy"
+	></bean>
+	
+	<!-- default-init-method가 없을 경우에는 에러가 발생하지 않지만
+	bean정의하는 사용자 정의 init-method가 없는 경우에는 에러가 발생한다 --> 
+	<bean id="t4" class="kr.co.ezenac.beans.TestBean4" lazy-init="true"
+		init-method="bean4_init" destroy-method="bean4_destroy"></bean>
+</beans>
