@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="obj1" class="kr.co.ezenac.beans.TestBean1" lazy-init="true"></bean>
+	
+	<!-- constructor-arg 태그를 통한 생성자 값 의존성 주입하기 -->
+	<bean id="obj2" class="kr.co.ezenac.beans.TestBean1" lazy-init="true">
+		<constructor-arg value="100" type="int"/>
+	</bean>
+	
+	<bean id="obj3" class="kr.co.ezenac.beans.TestBean1" lazy-init="true">
+		<constructor-arg value="11.11" type="double"/>
+	</bean>
+	
+	<bean id="obj4" class="kr.co.ezenac.beans.TestBean1" lazy-init="true">
+		<constructor-arg value="문자열" type="java.lang.String"/>
+	</bean>
+	
+	<!-- 생성자 값이 여러개 들어갈때는 constructor-arg 를 여러개 만들어줘야 한다 -->
+	<bean id="obj5" class="kr.co.ezenac.beans.TestBean1" lazy-init="true">
+		<constructor-arg value="100" type="int" />
+		<constructor-arg value="11.11" type="double"/>
+		<constructor-arg value="안녕하세요" type="java.lang.String"/>
+	</bean>
+	
+	<!--  꼭 생성자 변수의 순서가 맞지 않아도 type명을 명시해두고, 필요한 요소만 다 있다면 에러가 뜨지 않는다 -->
+	<bean id="obj6" class="kr.co.ezenac.beans.TestBean1" lazy-init="true">
+		<constructor-arg value="반갑습니다" type="java.lang.String"/>
+		<constructor-arg value="300" type="int" />
+		<constructor-arg value="33.33" type="double"/>
+	</bean>
+	
+	<!-- index를 통해 직접 생성자 매개변수의 위치를 지정해 줄 수 있다 -->
+	<bean id="obj7" class="kr.co.ezenac.beans.TestBean1" lazy-init="true">
+		<constructor-arg value="안녕하세요" type="java.lang.String" index="2"/>
+		<constructor-arg value="44" type="int" index="0"/>
+		<constructor-arg value="44.44" type="double" index="1"/>
+	</bean>
+	
+	<!--  생성자 매개변수가 객체타입일때의 설정법 -->
+	<bean id="obj8" class="kr.co.ezenac.beans.TestBean2" lazy-init="true">
+		<!-- 해당 객체를 bean태그와 class 속성을 통해 경로를 지정해준다 -->
+		<constructor-arg>
+			<bean class="kr.co.ezenac.beans.DataBean"></bean>
+		</constructor-arg>
+		
+		<constructor-arg>
+			<bean class="kr.co.ezenac.beans.DataBean"></bean>
+		</constructor-arg>
+	</bean>
+			
+	<!-- 경로가 아닌 ref를 통한 객체 설정 하는 방법 -->
+	<!-- 1. ref로 설정할 객체를 bean에 저장하고 (프로토타입을 통해 싱글톤 속성을 없애줘야 여러 객체생성이 가능하다)-->
+	<!-- 만약 scope="prototype" 으로 설정하지 않는다면 ref에는 같은 객체로 들어가게 된다 -->
+	<bean id="data_bean" class="kr.co.ezenac.beans.DataBean" scope="prototype"></bean>
+	
+	<!-- bean에 저장된 id 값을 ref값으로 설정해준다-->
+	<bean id="obj9" class="kr.co.ezenac.beans.DataBean" lazy-init="true">
+		<constructor-arg ref="data_bean"></constructor-arg>
+		<constructor-arg ref="data_bean"></constructor-arg>
+	</bean>			
+</beans>
