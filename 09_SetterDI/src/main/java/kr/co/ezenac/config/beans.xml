@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- scope="prototype"을 넣으면 ref를 통해 객체를 넣어줄때 매번 새로운 객체를 넣어준다 -->
+	<!-- 싱글톤 속성을 없애기 때문 -->
+	<bean id="DataBean" class="kr.co.ezenac.beans.DataBean" scope="prototype"></bean>
+	
+	<!-- 
+		property를 통해 setter 메소드를 통해 의존성을 주입한다
+		setData1(100); 하는것과 같다
+	 -->
+	<bean id="t1" class="kr.co.ezenac.beans.TestBean">
+		<property name="data1" value="100"></property>
+		<property name="data2" value="11.11"></property>
+		<property name="data3" value="true"></property>
+		<property name="data4" value="안녕하세요"></property>
+		<property name="data5">
+			<bean class="kr.co.ezenac.beans.DataBean"></bean>
+		</property>
+		<property name="data6">
+			<bean class="kr.co.ezenac.beans.DataBean"></bean>
+		</property>
+<!-- 		<property name="data5" ref="DataBean"></property> -->
+<!-- 		<property name="data6" ref="DataBean"></property> -->
+	</bean>
+	
+	
+</beans>
