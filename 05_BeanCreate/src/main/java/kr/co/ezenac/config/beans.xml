@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+<!-- 	bean에 등록			 -->
+<!-- 	<bean id="test1" class="kr.co.ezenac.beans.TestBean"></bean> -->
+<!-- 	<bean id="test2" class="kr.co.ezenac.beans.TestBean"></bean> -->
+<!-- 	<bean id="test3" class="kr.co.ezenac.beans.TestBean"></bean> -->
+
+<!-- lazy-init="true"일 경우 xml을 로딩할 때 객체가 생성되지 않는다 eager-loading(즉시 로딩 특성을 지닌다)-->
+<!-- getBean 메서드를 호출할 떄 생성되고 동일 id일때 singleton 특성이 적용된다 그러므로 객체는 하나만 생성 -->
+<!-- <bean id="test4" class="kr.co.ezenac.beans.TestBean" lazy-init="true"></bean> -->
+
+<!-- scope="prototype" id가 같아도 여러번 객체 생성을 할 수 있게 해준다 싱글톤 특성(X)-->
+<bean id="test5" class="kr.co.ezenac.beans.TestBean" scope="prototype"></bean>
+</beans>
