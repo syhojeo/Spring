@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<bean id="obj1" class="kr.co.ezenac.beans.TestBean1" >
+		<property name="data1" ref="data_bean1"></property>
+		<property name="data2" ref="data_bean1"></property>
+	</bean>
+	
+	<!-- name 을 이용한 자동 주입 -->
+	<bean id="obj2" class="kr.co.ezenac.beans.TestBean1" autowire="byName"></bean>
+	<bean id="data1" class="kr.co.ezenac.beans.DataBean1"></bean>
+	<bean id="data2" class="kr.co.ezenac.beans.DataBean1"></bean>
+	
+	<!-- DataBean1 을 data_bean1으로 bean에 저장 -->
+	<bean id="data_bean1" class="kr.co.ezenac.beans.DataBean1" scope="prototype"></bean>
+						
+</beans>
