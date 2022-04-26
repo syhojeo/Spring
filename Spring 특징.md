@@ -48,7 +48,7 @@ AOP는 핵심 기능과 공통기능을 분리시켜 핵심 로직에 영향을 
 
 ## MVC (model2)
 
-![1](https://github.com/syhojeo/Spring/blob/main/Spring/image/1.png)
+![MVC](https://github.com/syhojeo/Spring/blob/main/image/1.png)
 
 MVC (Model View Controller)
 
