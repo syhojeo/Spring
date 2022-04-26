@@ -1,0 +1,22 @@
+
+.metadata/.lock
+.metadata/.log
+.metadata/.mylyn/.taskListIndex/segments_1
+.metadata/*
+01_javaBasic/.classpath
+*/.classpath/*
+02_Polymophism/.classpath
+
+*.project
+*.settings
+*.classpath
+*.MF
+*.policy
+*.class
+*.properties
+/.metadata/
+Servers/Tomcat v8.5 Server at localhost-config/web.xml
+Servers/Tomcat v8.5 Server at localhost-config/tomcat-users.xml
+Servers/Tomcat v8.5 Server at localhost-config/server.xml
+Servers/Tomcat v8.5 Server at localhost-config/context.xml
+target/
