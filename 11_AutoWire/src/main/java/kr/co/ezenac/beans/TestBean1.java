@@ -3,6 +3,8 @@ package kr.co.ezenac.beans;
 public class TestBean1 {
 	private DataBean1 data1;
 	private DataBean1 data2;
+	
+	
 	public DataBean1 getData1() {
 		return data1;
 	}

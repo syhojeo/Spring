@@ -10,7 +10,14 @@ public class TestBean3 {
 		this.data3 = data3;
 		this.data4 = data4;
 	}
-
+	
+	public TestBean3(int data1, String data2, DataBean2 data3, DataBean2 data4) {
+		this.data1 = data1;
+		this.data2 = data2;
+		this.data3 = data3;
+		this.data4 = data4;
+	}
+	
 	public int getData1() {
 		return data1;
 	}
