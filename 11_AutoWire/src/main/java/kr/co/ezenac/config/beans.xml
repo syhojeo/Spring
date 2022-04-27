@@ -32,7 +32,7 @@
 	<!-- 때문에 byType방법으로 의존성 주입하는 객체는 두번이상 읽어와서 bean에 저장할 경우 nested 에러가 발생한다 -->
 	<bean id="data_bean2" class="kr.co.ezenac.beans.DataBean2"></bean>
 	<bean id="obj3" class="kr.co.ezenac.beans.TestBean2" autowire="byType"></bean>
-	<!-- 위에서 한번 DataBean2를 bean에 저장시켰기 때문에 한번더 읽어올 수 없다 -->
+	<!-- 위에서 한번 DataBean2를 bean에 저장시켰기 때문에 한번더 읽어올 수 없다 윗윗줄 지우고 바로 밑줄만쓰는게 byType 정석 -->
 <!-- 	<bean class="kr.co.ezenac.beans.DataBean2"></bean> -->
 <!-- 	<bean class="kr.co.ezenac.beans.DataBean2"></bean> -->
 	
