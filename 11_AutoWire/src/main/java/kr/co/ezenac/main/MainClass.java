@@ -23,8 +23,8 @@ public class MainClass {
 		
 		TestBean1 obj2 = ctx.getBean("obj2", TestBean1.class);
 		
-		System.out.printf("obj2.data1 : %s\n", obj1.getData1());
-		System.out.printf("obj2.data2 : %s\n", obj1.getData2());
+		System.out.printf("obj2.data1 : %s\n", obj2.getData1());
+		System.out.printf("obj2.data2 : %s\n", obj2.getData2());
 		
 		System.out.println("----------------------------------------");
 		
