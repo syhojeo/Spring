@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+	<!-- 생성자를 통한 DI (constructor-arg) -->
+	<bean id="xml1" class="kr.co.ezenac.beans.TestBean1" lazy-init="true">
+		<constructor-arg value="100" type="int" index="0"></constructor-arg>
+		<constructor-arg value='문자열1' index="1"></constructor-arg>
+		<constructor-arg ref="data_bean1" index="2"></constructor-arg>
+	</bean>
+		
+	<!-- Setter 를 통한 DI (Property 이용하기) -->	
+	<bean id="xml2" class="kr.co.ezenac.beans.TestBean1" lazy-init="true">
+		<property name="data1" value="200"></property>
+		<property name="data2" value="문자열2"></property>
+		<property name="data3" ref="data_bean1"></property>
+	</bean>
+				
+	<!-- 해당 객체 bean에 저장 후 id를 이용하여 ref로 사용 -->
+	<bean id="data_bean1" class="kr.co.ezenac.beans.DataBean1"></bean>
+	
+	<!-- byName을 이용한 객체 자동주입(autowire) -->
+	<bean id="data1" class="kr.co.ezenac.beans.DataBean2"></bean>
+	<bean id="data2" class="kr.co.ezenac.beans.DataBean2"></bean>
+	
+	<bean id="xml3" class="kr.co.ezenac.beans.TestBean2" lazy-init="true" autowire="byName"></bean>
+	
+	<!-- byType을 이용한 객체 자동주입 -->
+	<bean class="kr.co.ezenac.beans.DataBean3"></bean>
+	<bean id="xml4" class="kr.co.ezenac.beans.TestBean3" lazy-init="true" autowire="byType"></bean>
+	
+<!-- 	생성자 자동 주입 연습해 보기 (주석 지우지 말것 다른곳에서 테스트하고 가져온거라 포멧이다르다)-->
+	
+<!-- 	자동 주입을 할경우에는 자동주입하는 변수가 bean 존재해야한다 	(type 형이든, name 형이든) -->
+<!-- 	만약 직접 주입을 원할 경우에는 <constructor-arg> 태그를 통해 직접 주입을 해주면된다 -->
+			
+<!-- 	Type형으로 bean 저장 -->
+<!-- 	<bean class="kr.co.ezenac.beans.DataBean1"></bean>			 -->
+<!-- 	Name형으로 bean 저장 -->
+<!-- 	<bean id="data4" class="kr.co.ezenac.beans.DataBean2" scope="prototype"></bean>			 -->
+<!-- 	타입형으로는 겹치는 bean이 있을경우 에러가 발생한다 (이경우 위의 name형으로 DataBean2를 중복하여 저장하였다 -->
+<!-- 	<bean class="kr.co.ezenac.beans.DataBean2" scope="prototype"></bean> -->
+	
+<!-- name 형으로 저장하던 type형으로 저장하던 bean에 저장되고 autowire="constructor라면	 -->
+<!-- 알아서 저장된 bean을 찾아가서 가져온다 -->
+<!-- 	<bean id="obj1" class="kr.co.ezenac.beans.TestBean1" autowire="constructor"> 		-->
+<!-- 		<constructor-arg value="200" type="int"></constructor-arg> 					-->
+<!-- 	</bean>	 																			-->
+</beans>
