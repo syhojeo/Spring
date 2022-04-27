@@ -65,4 +65,24 @@
 	<bean id='obj9' class="kr.co.ezenac.beans.TestBean1" autowire='no'></bean>
 
 
+
+
+<!-- 	생성자 자동 주입 연습해 보기 (주석 지우지 말것 다른곳에서 테스트하고 가져온거라 포멧이다르다)-->
+	
+<!-- 	자동 주입을 할경우에는 자동주입하는 변수가 bean 존재해야한다 	(type 형이든, name 형이든) -->
+<!-- 	만약 직접 주입을 원할 경우에는 <constructor-arg> 태그를 통해 직접 주입을 해주면된다 -->
+			
+<!-- 	Type형으로 bean 저장 -->
+<!-- 	<bean class="kr.co.ezenac.beans.DataBean1"></bean> -->
+<!-- 	Name형으로 bean 저장 -->
+<!-- 	<bean id="data4" class="kr.co.ezenac.beans.DataBean2" scope="prototype"></bean> -->
+<!-- 	타입형으로는 겹치는 bean이 있을경우 에러가 발생한다 (이경우 위의 name형으로 DataBean2를 중복하여 저장하였다 -->
+<!-- 	<bean class="kr.co.ezenac.beans.DataBean2" scope="prototype"></bean> -->
+	
+<!-- name 형으로 저장하던 type형으로 저장하던 bean에 저장되고 autowire="constructor라면	 -->
+<!-- 알아서 저장된 bean을 찾아가서 가져온다 -->
+<!-- 	<bean id="obj1" class="kr.co.ezenac.beans.TestBean1" autowire="constructor"> -->
+<!-- 		<constructor-arg value="200" type="int"></constructor-arg> -->
+<!-- 	</bean>	 -->
+
 </beans>
