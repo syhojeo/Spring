@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  xmlns:context추가, schemaLocation 2줄 추가 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- 
+		ApplicationContext 안에 이미 등록된 bean들의 Annotation을 활성화 하기 위해 사용된다.
+		bean들이 XML로 등록됐는지 혹은 패키지 스캐닝을 통해 등록됐는지는 중요하지 않다.
+		이미 스프링 컨텍스트에 의해 생성되어 저장된 bean들에 대해서 @Autowired와 @Qualifier Annotation을 인식할 수 있다.
+		component-scan 또한 같은 일을 할 수 있는데, context:annotation-config는 bean을 등록하는 작업을 하지 않는다.
+		즉, bean을 등록하기 위해 패키지를 안의 클래스를 스캔할 수 없다.
+		이 태그를 설정하면 @Required @Autowired @Resource @PostConstruct @PreDestroy @Configuration 기능을 각각 설정하지 않아도 된다.
+	-->
+	<context:annotation-config></context:annotation-config>
+	
+	<!-- setter 통한 DI -->
+	<bean id="xml1" class="kr.co.ezenac.beans.TestBean1">
+		<property name="data1" value="100"></property>
+	</bean>				
+	
+	<bean class="kr.co.ezenac.beans.DataBean1"></bean>
+	
+	<!--
+		Autowired 에서 중복된 타입 문제가 발생할때  
+		타입이 같지만 id를 지정하고, Qualifier 에 id 값을 넣어주면 타입 중복 문제가 발생하지 않는다 
+	-->
+	
+	<bean id="obj4" class="kr.co.ezenac.beans.DataBean2"></bean>
+ 	<bean id="obj5" class="kr.co.ezenac.beans.DataBean2"></bean>
+
+
+	<!-- 
+		생성자 자동주입을 했을때 생성자가 여러개일 경우
+		bean에 저장된 데이터들의 타입과 생성자 매개변수의 타입을 비교하여
+		생성자 오버로딩을 실시한다
+		
+		만약 밑의 코드에서 DataBean4를 주석 처리하여 bean에 저장하지 않는 경우
+		생성자는 DataBean4를 bean에서 찾지 못하여 생성자 실행시 해당 매개변수타입이 없는걸로 
+		간주하여 생성자를 선택한다 
+	 -->
+	<bean id="xml2" class="kr.co.ezenac.beans.TestBean2" autowire="constructor"></bean>
+	<bean class="kr.co.ezenac.beans.DataBean3"></bean>
+	<bean class="kr.co.ezenac.beans.DataBean4"></bean>
+</beans>
