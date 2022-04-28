@@ -1,5 +1,7 @@
 package kr.co.ezenac.config;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +25,9 @@ public class BeanConfigClass {
 		return new TestBean1();
 	}
 	
+	//@PostConstruct
+	//@PreDestroy 
+	//TestBean2() 에 직접 사용
 	@Bean
 	@Lazy
 	public TestBean2 java2() {
