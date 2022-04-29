@@ -33,8 +33,18 @@ public class BeanConfigClass {
 		return new DataBean2();
 	}
 	
+//	@Bean
+//	public TestBean2 java2() {
+//		return new TestBean2();
+//	}
+	
 	@Bean
-	public TestBean2 java2() {
-		return new TestBean2(0, null, null, null);
+	public DataBean3 data_bean3() {
+		return new DataBean3();
+	}
+	
+	@Bean
+	public DataBean4 data_bean4() {
+		return new DataBean4();
 	}
 }
