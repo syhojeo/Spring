@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--  xmlns:context추가, schemaLocation 2줄 추가 -->
+<!--  xmlns:context추가, schemaLocation 2줄 추가, aop 추가 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/context
-						http://www.springframework.org/schema/context/spring-context.xsd">
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-		
-	<!-- 지정된 패키지의 Bean 클래스들의 어노테이션을 분석하여 Bean을 등록하려고 지정한다 -->
-	<context:component-scan base-package="kr.co.ezenac.beans2"></context:component-scan>
-	<context:component-scan base-package="kr.co.ezenac.beans3"></context:component-scan>
+	<bean id="xml1" class="kr.co.ezenac.beans.TestBean"></bean>
 	
-	<bean class="kr.co.ezenac.beans.TestBean1"></bean>
-	<bean id="xml2" class="kr.co.ezenac.beans.TesetBan2"></bean>
-	<bean id="xml3" class="kr.co.ezenac.beans.TesetBan2"></bean>
-						
+	
+	<!-- 공통 기능을 제공할 클래스를 빈으로 등록 -->	
+	<bean id="advisor1" class="kr.co.ezenac.advisor.AdvisorClass"></bean>
+	
+	 <!-- Aspect 설정: Advice를 어떤 Pointcut에 적용할 지 설정 -->
+	<aop:config>
+		<!-- Aspect J의 표현식 --> 
+		<aop:aspect ref="advisor1">
+		<!--  pointcut 이라는 호출할 메소드의 범위를 결정하고 / * - 모든 파라미터를 가진 / (..) - 하위 패키지까지 포함. -->
+			<aop:pointcut expression="execution(* method1())" id="point1"/>
+			
+			<!-- aop: 호출시점 / method= 공통기능 -->
+			<aop:before method="beforeMethod" pointcut-ref="point1"/>
+			<aop:after method="afterMethod" pointcut-ref="point1"/>
+			<aop:after-returning method="afterRetruningMethod" pointcut-ref="point1"/>
+			<aop:after-throwing method="afterThrowingMethod" pointcut-ref="point1" throwing="e1"/>
+			<aop:around method="aroundMethod" pointcut-ref="point1"/>
+
+		</aop:aspect>
+	</aop:config>					
 </beans>
+
+<!-- https://maeryo88.tistory.com/200 적당히 설명 블로그 -->	
