@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  xmlns:context추가, schemaLocation 2줄 추가, aop 추가 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="xml1" class="kr.co.ezenac.beans.TestBean1"></bean>
+	<bean id="xml2" class="kr.co.ezenac.beans.TestBean2"></bean>
+	<bean id="xml3" class="kr.co.ezenac.beans2.TestBean1"></bean>
+	
+	<!-- adviosr 등록 -->
+	<bean id="advisor1" class="kr.co.ezenac.advisor.AdvisorClass"></bean>
+	
+	<aop:config>
+		<!-- aop 메서드들을 정의한 위치 -->
+		<aop:aspect ref="advisor1">
+			<!-- execution 안에 aop를 적용시킬 메서드 정의하기 -->
+			<!-- 밑과 같이 같은 aop 메서드(before) 대한 pointcut을 여러개 사용할 경우 마지막 pointcut만 적용된다 -->
+		
+			<!-- 반환타입이 void, TestBean1 클래스, method1 메서드, 매개 변수 없음-->
+	   		<aop:pointcut expression="execution(void kr.co.ezenac.beans.TestBean1.method1())" id="point1"/>
+			
+			<!-- 반환타입이 void, TestBean1 클래스, method1 메서드, 정수형 매개변수 1개-->
+			<aop:pointcut expression="execution(void kr.co.ezenac.beans.TestBean1.method1(int))" id="point1"/>
+			
+			<!-- 반환타입이 void, TestBean1 클래스, method1 메서드, 정수형 매개변수 1개-->
+			<aop:pointcut expression="execution(void kr.co.ezenac.beans.TestBean1.method1(int))" id="point1"/>
+			
+			<!-- 반환타입이 void, TestBean1 클래스, method1 메서드, 정수형 매개변수 1개, String 타입 매개변수 1개 -->
+			<aop:pointcut expression="execution(void kr.co.ezenac.beans.TestBean1.method1(int, String))" id="point1"/>
+			
+			<!-- 반환타입이 void, TestBean1 클래스, method1 메서드, 모든 타입 매개변수 1개 -->
+			<aop:pointcut expression="execution(void kr.co.ezenac.beans.TestBean1.method1(*))" id="point1"/>
+			
+			<!-- 반환타입이 void, TestBean1 클래스, method1 메서드, 모든 타입 매개변수 2개 -->
+			<aop:pointcut expression="execution(void kr.co.ezenac.beans.TestBean1.method1(*, *))" id="point1"/>
+			
+			<!-- 반환타입이 void, TestBean1 클래스, method1 메서드, 개수 제한이 없는 모든 타입 매개변수 -->
+			<aop:pointcut expression="execution(void kr.co.ezenac.beans.TestBean1.method1(..))" id="point1"/>
+			
+			<!-- 반환타입이 void, TestBean1 클래스, 모든 메서드, 개수 제한이 없는 모든 타입 매개변수 -->
+			<aop:pointcut expression="execution(void kr.co.ezenac.beans.TestBean1.*(..))" id="point1"/>
+			
+			<!-- 반환 타입이 void, kr.co.ezenac.beans.모든클래스, method1 메서드 -->
+			<aop:pointcut expression="execution(void kr.co.ezenac.beans.*.method1(..))" id="point1"/>
+			
+			<!-- 반환 타입이 void, kr.co.ezenac.beans.모든클래스, 모든 메서드 -->
+			<aop:pointcut expression="execution(void kr.co.ezenac.beans.*.*(..))" id="point1"/>
+			
+			<!-- 반환 타입이 void, kr.co.ezenac.모든 패키지, 모든클래스, 모든 메서드 -->
+			<aop:pointcut expression="execution(void kr.co.ezenac.*.*.*(..))" id="point1"/>
+			
+			<!-- 반환 타입이 void, 모든 패키지, 모든클래스, 모든 메서드 -->
+			<!-- *로만 패키지, 클래스를 표현할때는 *을 3개이상 붙여선 안된다(아마 첫번째 별이 패키지 전체를 뜻하기 때문) -->
+			<!-- ex) void *.*.*(..)  (X) -->
+			<aop:pointcut expression="execution(void *.*(..))" id="point1"/>
+			
+			<!-- * 하나만 해줘도 된다 --> 
+			<!-- <aop:pointcut expression="execution(void *(..))" id="point1"/> -->
+			
+			<!-- 반환 타입이 int, 모든 패키지, 모든클래스, 모든 메서드 -->
+			<aop:pointcut expression="execution(int *.*(..))" id="point1"/>
+			
+			<!-- 모든 반환 타입이 int, 모든 패키지, 모든클래스, 모든 메서드 -->
+			<aop:pointcut expression="execution(* *(..))" id="point1"/>
+			
+			<!-- 모든 패키지 method1 -->
+			<aop:pointcut expression="execution(* method1(..))" id="point1"/>
+			
+			<!-- point1에 대해 실행될 aop before 메서드 설정 -->		
+			<aop:before method="beforeMethod" pointcut-ref="point1"></aop:before>
+		</aop:aspect>
+	</aop:config>			
+</beans>
